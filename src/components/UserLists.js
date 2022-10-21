@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 
 // list menus
@@ -35,9 +36,11 @@ const menus = [
        <td className="py-4 px-6">{props.email}</td>
        <td className="py-4 px-6">{props.avatar}</td>
        <td className="py-4 px-6">
-         <a href="#/" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-           View Detail
-         </a>
+        <Link to="/details">
+          <a href="#/" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+            View Detail
+          </a>
+        </Link>
        </td>
      </tr>
    );
