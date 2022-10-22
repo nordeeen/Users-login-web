@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 
 // list menus
@@ -48,8 +49,8 @@ const menus = [
 
 
 const UserLists = () => {
+  const navigate = useNavigate();
   const [users, setUsers] = useState([]);
-//   const [data, setDatas] = useState([]);
 
 // get api 1
   useEffect(() => {
@@ -61,21 +62,26 @@ const UserLists = () => {
     .catch((err) => console.error('Message Error', err));
   }, [])
 
-  // get api 2
-//   useEffect(() => {
-//     axios
-//       .get('https://reqres.in/api/users?page=2')
-//       .then((res) => {
-//         setDatas(res.data.data);
-//         console.log(res.data.data);
-//       })
-//       .catch((err) => console.error('Message Error', err));
-//   }, [])
 
+// Click Button Navbar
+  const handleBtn = () => {
+    navigate('/')
+  }
 
   return (
     <>
-      <div className='flex justify-center items-center w-full h-screen bg-pink-300'>
+      {/* Navbar */}
+      <div className="bg-[red] w-auto py-5 px-4 flex justify-center items-center">
+        <div className="w-[800px] h-auto flex justify-between items-center">
+          <p className="text-2xl text-white font-extrabold uppercase">User Lists</p>
+          <button onClick={handleBtn} type="submit" className="bg-white text-white uppercase px-6 py-2 rounded-full text-center font-bold bg-blue-500 hover:bg-blue-700">
+            go home
+          </button>
+        </div>
+      </div>
+
+      {/* Table Lists */}
+      <div className="flex justify-center items-center w-full h-[550px] py-10 bg-pink-300">
         <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
           <table className="w-auto text-sm text-left text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-gray-700 uppercase bg-blue-500 dark:bg-gray-700 dark:text-gray-400">
