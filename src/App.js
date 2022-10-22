@@ -2,13 +2,10 @@ import React, { useEffect } from 'react';
 import UserLogin from 'components/UserLogin';
 import UserLists from 'components/UserLists';
 import UserDetails from 'components/UserDetails';
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { Routes, Route } from 'react-router-dom';
+
 
 function App() {
-  const navigate = useNavigate();
-
-
   return (
       <Routes>
         <Route path="/" element={<UserLogin />} />
