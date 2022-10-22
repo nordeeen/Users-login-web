@@ -1,7 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getApi } from 'store/reducer';
 
 
 // list menus
@@ -37,11 +38,11 @@ const menus = [
        <td className="py-4 px-6">{props.email}</td>
        <td className="py-4 px-6">{props.avatar}</td>
        <td className="py-4 px-6">
-        <Link to="/details">
-          <a href="#/" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-            View Detail
-          </a>
-        </Link>
+         <NavLink
+           to="/details"
+           className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+          View Detail
+         </NavLink>
        </td>
      </tr>
    );
@@ -50,18 +51,12 @@ const menus = [
 
 const UserLists = () => {
   const navigate = useNavigate();
-  const [users, setUsers] = useState([]);
+  const dispatch = useDispatch();
+  const { lists } = useSelector(state => state)
 
-// get api 1
   useEffect(() => {
-    axios.get('https://reqres.in/api/users?page=1')
-    .then(res => {
-        setUsers(res.data.data);
-        console.log(res.data.data);
-    })
-    .catch((err) => console.error('Message Error', err));
-  }, [])
-
+    dispatch(getApi())
+  }, [dispatch])
 
 // Click Button Navbar
   const handleBtn = () => {
@@ -94,7 +89,7 @@ const UserLists = () => {
               </tr>
             </thead>
             <tbody>
-              {users.map((user) => {
+              {lists.map((user) => {
                 return (
                   <DataList
                     key={user.id}

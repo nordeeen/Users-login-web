@@ -3,6 +3,7 @@ import Swal from 'sweetalert2';
 
 const { createSlice, createAsyncThunk } = require('@reduxjs/toolkit');
 
+// post
 export const login = createAsyncThunk('/login', async (data, { rejectWithValue, getState, dispatch }) => {
   const { email, password } = getState();
   try {
@@ -27,10 +28,25 @@ export const login = createAsyncThunk('/login', async (data, { rejectWithValue, 
   }
 });
 
+
+// get
+export const getApi = createAsyncThunk(
+  '/users',
+  async (page, {rejectWithValue}) => {
+    try {
+      const response = await service.getApi();
+      return response.data;
+    } catch (error) {
+      rejectWithValue(error)
+    }
+  }
+);
+
 const initiaLState = {
   email: '',
   password: '',
   token: '',
+  lists: [], 
 };
 
 const reducer = createSlice({
@@ -42,9 +58,10 @@ const reducer = createSlice({
     },
   },
   extraReducers: (builder) => {
-    // builder.addCase(login.fulfilled, (state, action) => {
-    //   console.log(action.payload, 'payload cuy');
-    // });
+   builder.addCase(getApi.fulfilled, (state, action) => {
+    // console.log('balikan dari BE', action.payload);
+    state.lists = action.payload
+   })
   },
 });
 
