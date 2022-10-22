@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import UserLogin from 'components/UserLogin';
 import UserLists from 'components/UserLists';
 import UserDetails from 'components/UserDetails';
