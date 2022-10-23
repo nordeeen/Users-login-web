@@ -11,7 +11,6 @@ const UserLogin = () => {
   const dispatch = useDispatch();
   const { email, password, token } = useSelector((state) => state);
 
-  
   useEffect(() => {
     const logged = sessionStorage.getItem('isLogged');
     const tokenSession = sessionStorage.getItem('token');
@@ -23,6 +22,10 @@ const UserLogin = () => {
 
   const handlerLogin = async (e) => {
     e.preventDefault();
+    if(email.trim().length === 0 || password.trim().length === 0) {
+      alert("email and password cannot empty")
+      return;
+    }
     await dispatch(login());
     await navigate('/lists');
   };
@@ -68,8 +71,7 @@ const UserLogin = () => {
                 className="outline-none opacity-4"
                 onChange={(e) => {
                   dispatch(setReducer({ key: 'password', value: e.target.value }));
-                }}
-              />
+                }}/>
             </div>
             {/* Button */}
             <button

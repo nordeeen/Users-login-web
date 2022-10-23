@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getList } from 'store/reducer';
 import { getDetail } from 'store/reducer';
 import Loading from './Loading';
+import Navbar from './Navbar';
 
 // list menus
 const menus = [
@@ -30,8 +31,7 @@ const DataList = (props) => {
     <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
       <th
         scope="row"
-        className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-      >
+        className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
         {props.id}
       </th>
       <td className="py-4 px-6">{props.name}</td>
@@ -56,11 +56,7 @@ const UserLists = () => {
     dispatch(getList(1));
   }, [dispatch]);
 
-  // Click Button Navbar
-  const handleBtn = () => {
-     sessionStorage.clear()
-    navigate('/');
-  };
+
 
   const handleDetail = async (id) => {
     await dispatch(getDetail(id));
@@ -71,19 +67,7 @@ const UserLists = () => {
   return (
     <>
       {/* Navbar */}
-      <div className="bg-[red] w-auto py-5 px-4 flex justify-center items-center">
-        <div className="w-[800px] h-auto flex justify-between items-center">
-          <p className="text-2xl text-white font-extrabold uppercase">User Lists</p>
-          <button
-            onClick={handleBtn}
-            type="submit"
-            className=" text-white uppercase px-6 py-2 rounded-full 
-            text-center font-bold bg-blue-500 hover:bg-blue-700" >
-            Logout
-          </button>
-        </div>
-      </div>
-
+      <Navbar/>
       <div className="flex justify-center items-center w-full h-[550px] py-10 bg-gray-400 ">
         {/* Table Lists */}
         <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
