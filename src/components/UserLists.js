@@ -6,6 +6,7 @@ import { getDetail } from 'store/reducer';
 import Loading from './Loading';
 import Navbar from './Navbar';
 import ButtonPagination from './ButtonPagination';
+import iconView from 'assets/view-detail.png';
 
 // list menus
 const menus = [
@@ -39,9 +40,8 @@ const DataList = (props) => {
       <td className="py-4 px-6">{props.email}</td>
       <td className="py-4 px-6">{props.avatar}</td>
       <td className="py-4 px-6">
-        <button  onClick={props.onClick}
-          className="font-medium text-blue-600 dark:text-blue-500 hover:underline" >
-          View Detail
+        <button  onClick={props.onClick}>
+          <img src={iconView} alt="icon-view" className='w-[24px] h-[24px] object-contain'/>
         </button>
       </td>
     </tr>
@@ -64,7 +64,6 @@ const UserLists = () => {
     await navigate('/details');
   }
 
-  
   return (
     <>
       {/* Navbar */}
