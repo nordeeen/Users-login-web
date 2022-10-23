@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = (props) => {
     const navigate = useNavigate();
 
   // Click Button Navbar
@@ -14,7 +14,7 @@ const Navbar = () => {
     <>
       <div className="bg-[#fe4a49] w-auto py-5 px-4 flex justify-center items-center">
         <div className="w-[800px] h-auto flex justify-between items-center">
-          <p className="text-2xl text-white font-extrabold uppercase">User Lists</p>
+          <p className="text-2xl text-white font-extrabold uppercase">{props.title}</p>
           <button
             onClick={handleBtn}
             type="submit"

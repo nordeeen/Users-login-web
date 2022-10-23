@@ -67,7 +67,7 @@ const UserLists = () => {
   return (
     <>
       {/* Navbar */}
-      <Navbar />
+      <Navbar title="user lists" />
       <div
         className="flex justify-center items-center w-full h-[550px] py-10 bg-gray-300">
         {/* Wrapper Table */}
