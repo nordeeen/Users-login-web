@@ -67,16 +67,15 @@ const UserLists = () => {
   return (
     <>
       {/* Navbar */}
-      <Navbar title="user lists" />
-      <div
-        className="flex justify-center items-center w-full h-[550px] py-10 bg-gray-300">
+      <Navbar title="user lists"/>
+      <div className="flex justify-center items-center w-full h-[550px] py-10 bg-gray-300">
         {/* Wrapper Table */}
         <div className="w-auto h-auto py-6 px-6">
-          <ButtonPagination/>
+          <ButtonPagination />
           {/* Table Lists */}
           <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
             {loader && <Loading />}
-            <table className="w-auto text-sm text-left text-gray-500 dark:text-gray-400">
+            <table className="w-auto text-sm text-left text-gray-500 dark:text-gray-400 res-mob-table">
               <thead className="text-xs text-gray-700 uppercase bg-blue-700 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                   {menus.map((item, index) => (

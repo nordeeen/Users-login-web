@@ -12,7 +12,7 @@ const Navbar = (props) => {
   };
   return (
     <>
-      <div className="bg-[#fe4a49] w-auto py-5 px-4 flex justify-center items-center">
+      <div className="bg-[#fe4a49] w-auto py-5 px-4 flex justify-center items-center res-mob-nav">
         <div className="w-[800px] h-auto flex justify-between items-center">
           <p className="text-2xl text-white font-extrabold uppercase">{props.title}</p>
           <button

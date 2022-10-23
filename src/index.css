@@ -33,4 +33,18 @@
         }
         }
 
+        @media (min-width: 260px) and (max-width: 428px) {
+            .res-mob-img {
+                display: none;
+            }
+
+            .res-mob-form {
+                border-radius-right: none;
+                padding: 25px;
+                height: 500px;
+                width: 100%;
+                overflow-y: hidden;
+            }
+        }
+
 }

@@ -38,10 +38,10 @@ const UserLogin = () => {
           <img
             src={userLogin}
             alt="user-login"
-            className="w-[750px] h-[500px] object-cover rounded-l-[10px]"
+            className="w-[750px] h-[500px] object-cover rounded-l-[10px] res-mob-img"
           />
           {/* Form */}
-          <form className="w-[500px] h-auto bg-[#fe4a49] flex flex-col justify-center items-center space-y-10 rounded-r-[10px]">
+          <form className="res-mob-form w-[500px] h-auto bg-[#fe4a49] flex flex-col justify-center items-center space-y-10 rounded-r-[10px]">
             <h2 className="text-4xl font-semibold text-white text-center">User Login</h2>
             {/* Email */}
             <div className="bg-white w-auto h-[20px] px-4 py-6 rounded-full flex items-center">
@@ -71,7 +71,8 @@ const UserLogin = () => {
                 className="outline-none opacity-4"
                 onChange={(e) => {
                   dispatch(setReducer({ key: 'password', value: e.target.value }));
-                }}/>
+                }}
+              />
             </div>
             {/* Button */}
             <button
