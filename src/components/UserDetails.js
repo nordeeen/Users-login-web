@@ -1,50 +1,49 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import {  useSelector } from 'react-redux';
+import Navbar from './Navbar';
 
-// CardUsers component
-const CardUsers = (props) => {
+// CardDetail component
+const CardDetail = (props) => {
   return (
-    <div
-      className="bg-white w-[250px] h-[250px] rounded-lg border border-gray-200 shadow-md
-       dark:bg-gray-800 dark:border-gray-700 px-3 py-3"
-    >
-      <div className="flex flex-col items-center pb-10">
-        <img
-          className="mb-3 w-20 h-20 rounded-full shadow-lg object-contain"
-          src={props.avatar}
-          alt={props.avatar}
-        />
-        <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">{props.name}</h5>
-        <span className="text-sm text-gray-500 dark:text-gray-400">{props.email}</span>
-        <div className="flex mt-4 space-x-3 md:mt-6">
-          <Link
-            to="/lists"
-            className="w-[100px] h-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2
-               rounded-full uppercase text-center outline-none">
-            Back
-          </Link>
-        </div>
+    <div className="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+      <img
+        className="rounded-t-lg w-[300px] h-auto object-cover"
+        src={props.avatar}
+        alt={props.name}
+      />
+      <div className="p-5">
+        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">
+          {props.name}
+        </h5>
+        <h2 className="mb-3 text-lg font-normal text-gray-700 dark:text-gray-400 text-center">
+          {props.email}
+        </h2>
+      </div>
+      <div className='flex justify-center items-center mb-3'>
+      <NavLink to="/lists" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full uppercase">
+        back
+      </NavLink>
       </div>
     </div>
   );
-};
+}
+
 
 const UserDetails = () => {
   const { details } = useSelector((state) => state);
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center w-full h-screen bg-[pink]">
-        <div className="grid grid-cols-3 gap-4 px-6 py-6">
-            <CardUsers
-              key={details.id}
-              avatar={details.avatar}
-              alt={details.avatar}
-              name={`${details.first_name} ${details.last_name}`}
-              email={details.email}
-            />
-        </div>
+      <Navbar title="user detail" />
+      <div className="flex justify-center items-center w-full h-[550px] bg-gray-300">
+        <CardDetail
+          key={details.id}
+          avatar={details.avatar}
+          alt={details.avatar}
+          name={`${details.first_name} ${details.last_name}`}
+          email={details.email}
+        />
       </div>
     </>
   );
