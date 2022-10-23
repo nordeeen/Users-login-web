@@ -5,6 +5,7 @@ import { getList } from 'store/reducer';
 import { getDetail } from 'store/reducer';
 import Loading from './Loading';
 import Navbar from './Navbar';
+import ButtonPagination from './ButtonPagination';
 
 // list menus
 const menus = [
@@ -57,7 +58,7 @@ const UserLists = () => {
   }, [dispatch]);
 
 
-
+// handle click detail
   const handleDetail = async (id) => {
     await dispatch(getDetail(id));
     await navigate('/details');
@@ -67,56 +68,41 @@ const UserLists = () => {
   return (
     <>
       {/* Navbar */}
-      <Navbar/>
-      <div className="flex justify-center items-center w-full h-[550px] py-10 bg-gray-400 ">
-        {/* Table Lists */}
-        <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
-          {loader && <Loading />}
-          <table className="w-auto text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase bg-[red] dark:bg-gray-700 dark:text-gray-400">
-              <tr>
-                {menus.map((item, index) => (
-                  <th key={index} scope="col" className="py-3 px-6 text-left text-white">
-                    {item.title}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {lists.map((user) => {
-                return (
-                  <DataList
-                    key={user.id}
-                    id={user.id}
-                    name={`${user.first_name} ${user.last_name}`}
-                    email={user.email}
-                    avatar={user.avatar}
-                    onClick={handleDetail.bind(null, user.id)}
-                  />
-                );
-              })}
-
-              <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td className="py-4 px-6">
-                  <button
-                    className=" text-white uppercase px-6 py-2 rounded-full text-center font-bold bg-blue-500 hover:bg-blue-700"
-                    onClick={() => dispatch(getList(1))} >
-                    page 1
-                  </button>
-                </td>
-                <td className="py-4 px-6">
-                  <button
-                    className=" text-white uppercase px-6 py-2 rounded-full text-center font-bold bg-blue-500 hover:bg-blue-700"
-                    onClick={() => dispatch(getList(2))} >
-                    page 2
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+      <Navbar />
+      <div
+        className="flex justify-center items-center w-full h-[550px] py-10 bg-gray-300">
+        {/* Wrapper Table */}
+        <div className="w-auto h-auto py-6 px-6">
+          <ButtonPagination/>
+          {/* Table Lists */}
+          <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
+            {loader && <Loading />}
+            <table className="w-auto text-sm text-left text-gray-500 dark:text-gray-400">
+              <thead className="text-xs text-gray-700 uppercase bg-blue-700 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                  {menus.map((item, index) => (
+                    <th key={index} scope="col" className="py-3 px-6 text-left text-white">
+                      {item.title}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {lists.map((user) => {
+                  return (
+                    <DataList
+                      key={user.id}
+                      id={user.id}
+                      name={`${user.first_name} ${user.last_name}`}
+                      email={user.email}
+                      avatar={user.avatar}
+                      onClick={handleDetail.bind(null, user.id)}
+                    />
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </>
