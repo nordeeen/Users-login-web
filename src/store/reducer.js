@@ -21,6 +21,8 @@ export const login = createAsyncThunk('/login', async (data, { rejectWithValue, 
         sessionStorage.setItem('token', response.data.token)
         sessionStorage.setItem('isLogged', true);
         dispatch(setReducer({ key: 'token', value: response.data.token }));
+        dispatch(setReducer({ key: 'login', value: true }));
+
     }
     return response;
   } catch (err) {
@@ -30,23 +32,43 @@ export const login = createAsyncThunk('/login', async (data, { rejectWithValue, 
 
 
 // get
-export const getApi = createAsyncThunk(
+export const getList = createAsyncThunk(
   '/users',
-  async (page, {rejectWithValue}) => {
+  async (page, {rejectWithValue, dispatch}) => {
     try {
-      const response = await service.getApi();
+      dispatch(setLoader(true));
+      const response = await service.getList(page);
+      dispatch(setLoader(false));
       return response.data;
     } catch (error) {
       rejectWithValue(error)
+      dispatch(setLoader(false));
+
     }
   }
 );
+
+// get data id
+export const getDetail = createAsyncThunk(
+  '/users/',
+  async (id, {rejectWithValue}) => {
+    try {
+      const res = await service.getDetail(id)
+      return res.data;
+    } catch (error) {
+      rejectWithValue(error)      
+    }
+  }
+)
 
 const initiaLState = {
   email: '',
   password: '',
   token: '',
-  lists: [], 
+  lists: [],
+  details: {},
+  loader: false,
+  login: false,
 };
 
 const reducer = createSlice({
@@ -56,15 +78,22 @@ const reducer = createSlice({
     setReducer: (state, action) => {
       state[action.payload.key] = action.payload.value;
     },
+    setLoader : (state, action) => {
+      state.loader = action.payload;
+    }
   },
   extraReducers: (builder) => {
-   builder.addCase(getApi.fulfilled, (state, action) => {
-    // console.log('balikan dari BE', action.payload);
-    state.lists = action.payload
-   })
+   builder.addCase(getList.fulfilled, (state, action) => {
+     console.log('balikan dari BE', action.payload);
+     state.lists = action.payload;
+   });   
+   builder.addCase(getDetail.fulfilled, (state, action) => {
+    console.log('ambil data id', action.payload);
+    state.details = action.payload;
+   });
   },
 });
 
-export const { setReducer } = reducer.actions;
+export const { setReducer, setLoader } = reducer.actions;
 
 export default reducer.reducer;

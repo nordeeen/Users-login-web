@@ -16,9 +16,9 @@ const service = {
   },
 
   // get
-  getApi: async (page) => {
+  getList: async (page) => {
     try {
-      const response = await api.get('/users', {
+      const response = await api.get('/users/', {
         params: {
           page,
         },
@@ -28,6 +28,16 @@ const service = {
       return err;
     }
   },
+
+  // get data id
+  getDetail: async (id) => {
+    try {
+      const res = await api.get(`/users/${id}`)
+      return res.data;
+    } catch (error) {
+      return error;      
+    }
+  }
 };
 
 export default service;

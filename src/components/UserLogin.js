@@ -10,10 +10,13 @@ const UserLogin = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { email, password, token } = useSelector((state) => state);
+
+  
   useEffect(() => {
     const logged = sessionStorage.getItem('isLogged');
     const tokenSession = sessionStorage.getItem('token');
-    if (logged && tokenSession === token) {
+    if (logged && tokenSession !== '') {
+      dispatch(setReducer({ key: 'login', value: logged }));
       navigate('/lists');
     }
   }, []);
