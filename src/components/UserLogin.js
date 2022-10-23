@@ -5,11 +5,12 @@ import padLock from 'assets/padlock.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, setReducer } from 'store/reducer';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const UserLogin = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { email, password, token } = useSelector((state) => state);
+  const { email, password, token, login1 } = useSelector((state) => state);
 
   useEffect(() => {
     const logged = sessionStorage.getItem('isLogged');
@@ -18,16 +19,33 @@ const UserLogin = () => {
       dispatch(setReducer({ key: 'login', value: logged }));
       navigate('/lists');
     }
-  }, []);
+  }, [login1]);
 
-  const handlerLogin = async (e) => {
+  const handlerLogin = async  (e) => {
     e.preventDefault();
-    if(email.trim().length === 0 || password.trim().length === 0) {
-      alert("email and password cannot empty")
-      return;
+    if ([email, password].some((item) => !item || !item.length)) {
+      if (!email) {
+        return Swal.fire({
+          icon: 'error',
+          title: 'email cannot be empty',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+      if (!password) {
+        return Swal.fire({
+          icon: 'error',
+          title: 'password cannot be empty',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
     }
     await dispatch(login());
-    await navigate('/lists');
+    if(login1) {
+    await  navigate('/lists');
+
+    }
   };
 
   return (

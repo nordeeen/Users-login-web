@@ -8,7 +8,6 @@ import { useSelector } from 'react-redux';
 
 function App() {
   const {login} = useSelector(state => state)
-  console.log(login, 'login y')
 
 
   return (
