@@ -36,7 +36,7 @@ const UserDetails = () => {
   return (
     <>
       <Navbar title="user detail" />
-      <div className="flex justify-center items-center w-full h-[550px] bg-gray-300">
+      <div className="flex justify-center items-center w-full h-screen bg-gray-300">
         <CardDetail
           key={details.id}
           avatar={details.avatar}
